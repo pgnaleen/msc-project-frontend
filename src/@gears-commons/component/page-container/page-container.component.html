@@ -1,0 +1,13 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto w-full sm:overflow-hidden dark:bg-transparent"
+     *transloco="let t; read:'component'">
+
+    <!-- Header -->
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center w-full">
+        <ng-content select="[pageHeader]"></ng-content>
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-auto flex-col overflow-y-scroll w-full">
+        <ng-content></ng-content>
+    </div>
+</div>

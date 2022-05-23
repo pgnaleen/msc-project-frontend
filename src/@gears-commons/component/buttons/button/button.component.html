@@ -1,0 +1,32 @@
+<button *ngIf="type === 'raised'" mat-raised-button [color]="color" [disabled]="disabled" [class]="buttonClass">
+    <ng-container [ngTemplateOutlet]="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="type === 'stroked'" mat-stroked-button [color]="color" [disabled]="disabled" [class]="buttonClass"
+        (click)="buttonClick.emit($event);">
+    <ng-container [ngTemplateOutlet]="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="type === 'flat'" mat-flat-button [color]="color" [disabled]="disabled" [class]="buttonClass"
+        (click)="buttonClick.emit($event)">
+    <ng-container [ngTemplateOutlet]="buttonContent"></ng-container>
+</button>
+
+<button *ngIf="type === 'icon'" mat-icon-button [color]="color" [disabled]="disabled" [class]="buttonClass"
+        (click)="buttonClick.emit($event)">
+    <ng-container [ngTemplateOutlet]="buttonIconContent"></ng-container>
+</button>
+
+<button *ngIf="type === '' || type == null" mat-button [color]="color" [disabled]="disabled" [class]="buttonClass"
+        (click)="buttonClick.emit($event)">
+    <ng-container [ngTemplateOutlet]="buttonContent"></ng-container>
+</button>
+
+<ng-template #buttonContent>
+    <ng-container [ngTemplateOutlet]="buttonIconContent"></ng-container>
+    <ng-content></ng-content>
+</ng-template>
+
+<ng-template #buttonIconContent>
+    <gears-icon matPrefix [iconLib]="iconLib" [icon]="icon" [class]="iconClass" [class.me-2]="type != 'icon'"></gears-icon>
+</ng-template>

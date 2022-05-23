@@ -1,0 +1,41 @@
+<ng-container *transloco="let t; read: translationScope;">
+    <mat-form-field *ngIf="formGroup" class="w-full fuse-mat-dense mat-rich-text" [ngClass]="readOnly?'form-field-border-none':''"
+                    [formGroup]="formGroup" appearance="fill">
+        <mat-label>{{t(translationLabel)}}</mat-label>
+        <mat-quill [modules]="modules"
+                   [style.display]="readOnly ? 'none' : null" class="w-full"
+                   [formControlName]="key"
+        (onContentChanged)="contentChanged($event)"></mat-quill>
+        <div *ngIf="readOnly" class="rich-text-view-border">
+            <quill-view [content]="formGroup.get(key).value"></quill-view>
+        </div>
+        <mat-error *ngIf="formGroup.get(key).errors as errors" class="mb-1">
+            <ng-container *transloco="let tv; read: 'validation';">
+                <span *ngIf="errors?.required">{{tv('message.required', {field: t(translationLabel)}) }}</span>
+                <span *ngIf="errors?.minlength">
+                    {{tv('message.minLength') }}
+                    {{tv('correctiveAction.minLength', {min: errors.minlength.requiredLength}) }}
+                </span>
+                <span *ngIf="errors?.maxlength">
+                    {{tv('message.maxLength') }}
+                    {{tv('correctiveAction.maxLength', {max: errors.maxlength.requiredLength}) }}
+                </span>
+                <ng-container *ngIf="formGroup.get(key).errors?.api as apiErrors">
+                    <span *ngIf="apiErrors.code === 4009">
+                        {{tv('message.alreadyExists', {field: t(translationLabel), value: apiErrors.value}) }}
+                        {{tv('correctiveAction.alreadyExists') }}
+                    </span>
+                </ng-container>
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!formGroup" class="w-full" [ngClass]="readOnly?'form-field-border-none':''">
+        <mat-label>{{title}}</mat-label>
+        <mat-quill [modules]="modules" [style.display]="readOnly ? 'none' : null" class="w-full"></mat-quill>
+        <div *ngIf="readOnly" class="rich-text-view-border">
+            <quill-view [content]="formGroup.get(key).value"></quill-view>
+        </div>
+    </mat-form-field>
+</ng-container>
+

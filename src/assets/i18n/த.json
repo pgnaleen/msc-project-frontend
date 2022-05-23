@@ -1,0 +1,161 @@
+{
+    "label": {
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "2L": "සිංහල",
+        "2LSuffix": "({{label.2L}})"
+    },
+    "component": {
+        "anomalyDetection": "ஒழுங்கின்மை கண்டறிதல்",
+        "master": "Master"
+    },
+    "navigation": {
+        "administration": {
+            "title": "Administration",
+            "subtitle": "Manage administration data",
+            "master": {
+                "title": "{{component.master}}",
+                "subtitle": "Manage master data",
+                "anomalyDetection": "{{component.anomalyDetection}}"
+            }
+        }
+    },
+    "material": {
+        "pagination": {
+            "itemsPerPage": "Items per page",
+            "nextPage": "Next page",
+            "previousPage": "Previous page",
+            "firstPage": "First page",
+            "lastPage": "Last page",
+            "rangePageLabel1": "0 of {{length}}",
+            "rangePageLabel2": "{{startIndex}} - {{endIndex}} of {{length}}"
+        }
+    },
+    "form": {
+        "anomalyDetection": {
+            "datasetCode": "தரவுத்தொகுப்பு குறியீடு",
+            "datasetLocation": "தரவுத்தொகுப்பு இருப்பிடம்",
+            "accessLogLocation": "அணுகல் பதிவுகள் இருப்பிடம்"
+        }
+    },
+    "table": {
+        "anomalyDetection": {
+            "datasetCode": "தரவுத்தொகுப்பு குறியீடு",
+            "datasetLocation": "தரவுத்தொகுப்பு இருப்பிடம்",
+            "accessLogLocation": "அணுகல் பதிவுகள் இருப்பிடம்"
+        }
+    },
+    "button": {
+        "common": {
+            "add": "Train",
+            "edit": "Edit",
+            "ok": "OK",
+            "view": "View",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "save": "Train",
+            "assign": "Assign",
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
+    "validation": {
+        "message": {
+            "alreadyExists": "{{field}} {{value}} already exists.",
+            "required": "{{field}} is required.",
+            "invalidDecimalPoints": "Invalid decimal value.",
+            "notAValidEmail": "Invalid email.",
+            "notAValidUrl": "Invalid URL.",
+            "notAValidTelephone": "Invalid Phone number.",
+            "invalidSize": "Invalid image size.",
+            "invalidType": "Invalid image type.",
+            "invalidDate": "Invalid date.",
+            "minLength": "Invalid character length.",
+            "maxLength": "Invalid character length."
+        },
+        "correctiveAction": {
+            "alreadyExists": "Please enter a different value",
+            "invalidDecimalPoints": "Only {{expected}} decimal point(s) are allowed",
+            "notAValidEmail": "Please enter a valid email",
+            "notAValidUrl": "Please enter a valid URL",
+            "notAValidTelephone": "Please enter a valid Phone number",
+            "invalidSize": "Image size should be 600 x 600",
+            "invalidType": "Image type should be .png",
+            "invalidDate": "Please enter a valid date",
+            "minLength": "Min: {{min}} characters",
+            "maxLength": "Max: {{max}} characters"
+        }
+    },
+    "title": {
+        "page": {
+            "addComponent": "Add {{component}}",
+            "editComponent": "Edit {{component}}",
+            "viewComponent": "View {{component}}",
+            "componentMaster": "{{component}} {{component.master}}"
+        },
+        "drawer": {
+            "componentAssignment": "{{component}} Assignment",
+            "assignComponent": "Assign {{component}}",
+            "viewAssignment": "{{name}} Assignments"
+        }
+    },
+    "dropdown": {
+        "common": {
+            "placeholder": "-- Please Select --"
+        },
+        "filter": {
+            "placeholder": "All"
+        }
+    },
+    "dialog": {
+        "delete": {
+            "title": "Delete {{component}}",
+            "message": "Are you sure you want to delete this {{component}}? This action cannot be undone!",
+            "confirmAction": "Delete",
+            "cancelAction": "Cancel"
+        },
+        "saveChanges": {
+            "title": "Save Changes",
+            "message": "Do you want to save the changes?",
+            "confirmAction": "Yes",
+            "cancelAction": "No"
+        },
+        "common": {
+            "confirmAction": "{{button.common.yes}}",
+            "cancelAction": "{{button.common.no}}",
+            "okAction": "{{button.common.ok}}"
+        }
+    },
+    "message": {
+        "auth": {
+            "pleaseLogIn": "Unauthorized. Please Log In."
+        },
+        "common": {
+            "noRecordsAvailable": "No Records Available",
+            "networkError": "Network Error"
+        },
+        "delete": {
+            "success": "{{component}} deleted successfully",
+            "cannotDelete": "Cannot Delete",
+            "someEntitiesAssignedToThisComponent": "Some entities are assigned to this {{component}}"
+        },
+        "save": {
+            "success": "{{component}} saved successfully",
+            "error": "Error in saving {{component}}"
+        },
+        "update": {
+            "success": "{{component}} saved successfully"
+        }
+    },
+    "search": {
+        "common": {
+            "placeholder": "Search Keywords"
+        }
+    },
+    "menu": {
+        "view": "View",
+        "edit": "Edit",
+        "delete": "Delete"
+    }
+}

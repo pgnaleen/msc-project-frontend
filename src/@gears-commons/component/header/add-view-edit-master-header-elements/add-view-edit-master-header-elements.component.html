@@ -1,0 +1,30 @@
+<div class="flex flex-row items-center">
+    <gears-active-status-chip class="me-6" *ngIf="mode ==='VIEW'"
+                              [active]="activeStatus"></gears-active-status-chip>
+    <div *ngIf="mode != 'ADD'">
+        <mat-slide-toggle color="accent" class="me-6"
+                          [checked]="activeStatus" (change)="activeStatusChange.emit($event.checked)"
+                          *ngIf="mode !=='VIEW'">{{'label.active' | transloco}}</mat-slide-toggle>
+    </div>
+    <button *ngIf="mode === 'VIEW'" mat-stroked-button (click)="switchToEditMode.emit($event)" color="primary">
+        <mat-icon matPrefix>edit</mat-icon>
+        <span class="ms-2">{{'button.common.edit' | transloco}}</span>
+    </button>
+    <div class="flex sm:flex-row flex-col mt-4 sm:mt-0 sm:ms-4 gap-x-6">
+        <button class="w-30" mat-stroked-button (click)="dismissButtonClicked.emit($event)" *ngIf="mode !== 'VIEW'">
+            <mat-icon matPrefix>close</mat-icon>
+            <span class="ms-2">{{'button.common.cancel' | transloco}}</span>
+        </button>
+        <button class="w-30" mat-flat-button color="primary" cdkFocusInitial
+                (click)="dismissButtonClicked.emit($event)"
+                *ngIf="mode === 'VIEW'">
+            <mat-icon svgIcon="feather:check-circle"></mat-icon>
+            <span class="ms-2">{{'button.common.ok' | transloco}}</span>
+        </button>
+        <button class="w-30" mat-flat-button color="primary" (click)="submitButtonCLicked.emit($event)"
+                *ngIf="mode === 'ADD' || mode === 'EDIT'">
+            <mat-icon svgIcon="feather:save"></mat-icon>
+            <span class="ms-2">{{'button.common.save' | transloco}}</span>
+        </button>
+    </div>
+</div>

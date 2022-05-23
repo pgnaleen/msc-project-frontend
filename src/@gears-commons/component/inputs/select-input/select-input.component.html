@@ -1,0 +1,34 @@
+<ng-container *transloco="let t; read: translationScope;">
+    <mat-form-field *ngIf="formGroup" [formGroup]="formGroup" class="w-full fuse-mat-dense"
+                     [ngClass]="readOnly?'form-field-border-none':''" floatLabel="always">
+        <mat-label>{{title || t(translationLabel)}}</mat-label>
+        <input *ngIf="readOnly" matInput [readonly]="readOnly" [value]="selectedDisplayValue">
+        <mat-select *ngIf="!readOnly" [formControlName]="key" (selectionChange)="onSelectionChange($event)"
+                    [placeholder]="placeholder || ('dropdown.common.placeholder' | transloco)">
+            <mat-option>{{placeholder ||('dropdown.common.placeholder' | transloco)}}</mat-option>
+            <mat-option *ngFor="let option of optionValues" [value]="option[valueField]">
+                {{displayField != null ?
+                (translatable ? (option[isSecondaryLanguage ? displayField : (displayField2L || displayField)] | transloco) :
+                    option[isSecondaryLanguage ? displayField : (displayField2L || displayField)]) :
+                (translatable ? (isLookup ? isSecondaryLanguage ? option['name2L'] : option['name'] : displayFn(option) | transloco) :
+                    isLookup ? isSecondaryLanguage ? option['name2L'] : option['name'] : displayFn(option))}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get(key).errors?.required && placeholder !== 'All'"
+                   class="mb-1">{{'validation.message.required' | transloco:{field: t(translationLabel)} }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!formGroup" class="w-full" [ngClass]="readOnly?'form-field-border-none':''" floatLabel="always">
+        <mat-label>{{title || t(translationLabel)}}</mat-label>
+        <input *ngIf="readOnly" matInput [readonly]="readOnly" [value]="selectedDisplayValue">
+        <mat-select *ngIf="!readOnly" (selectionChange)="onSelectionChange($event)" [value]="initialValue"
+                    [placeholder]="placeholder || ('dropdown.common.placeholder' | transloco)">
+            <mat-option>{{placeholder || ('dropdown.common.placeholder' | transloco)}}</mat-option>
+            <mat-option *ngFor="let option of optionValues" [value]="option[valueField]">
+                {{displayField != null ?
+                (translatable ? (option[isSecondaryLanguage ? displayField : (displayField2L || displayField)] | transloco) :
+                    option[isSecondaryLanguage ? displayField : (displayField2L || displayField)]) :
+                (translatable ? (isLookup ? isSecondaryLanguage ? option['name2L'] : option['name'] : displayFn(option) | transloco) :
+                    isLookup ? isSecondaryLanguage ? option['name2L'] : option['name'] : displayFn(option))}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</ng-container>

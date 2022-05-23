@@ -1,0 +1,2 @@
+<mat-icon *ngIf="icon && iconLib === 'mat'" [className]="className">{{icon}}</mat-icon>
+<mat-icon *ngIf="icon && iconLib !== 'mat'" [className]="className" svgIcon="{{iconLib}}:{{icon}}"></mat-icon>

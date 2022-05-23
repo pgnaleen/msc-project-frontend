@@ -1,0 +1,27 @@
+<div>
+    <mat-form-field *transloco="let t; read: translationScope;" class="w-full fuse-mat-dense" [ngClass]="readOnly?'form-field-border-none':''" [formGroup]="formGroup">
+        <input type="file" style="display: none;" accept="image/png" (change)="!readOnly ? onFileSelected($event) : null"
+               #fileUpload >
+        <input matInput  [formControlName]="key" readonly>
+
+        <gears-icon [class.cursor-pointer]="!readOnly" icon="image" iconLib="feather" className="icon-size-5"
+                    matSuffix (click)="!readOnly ? fileUpload.click() : null"></gears-icon>
+        <mat-label>{{t(translationLabel)}}</mat-label>
+        <mat-hint *ngIf="!readOnly">{{'form.image.imageHint' | transloco}}</mat-hint>
+        <mat-error *ngIf="formGroup.get(key).errors as errors" class="mb-1">
+            <ng-container *transloco="let tv; read: 'validation';">
+                <span *ngIf="errors?.required">{{tv('message.required',{field: t(translationLabel)}) }}</span>
+                <span *ngIf="errors?.fileType || errors?.fileMaxAllowedSize">
+                    {{'form.image.imageHint' | transloco }}
+                </span>
+                <ng-container *ngIf="formGroup.get(key).errors?.api as apiErrors">
+                    <span *ngIf="apiErrors.code === 4050">{{tv('message.invalidSize')}} {{tv('correctiveAction.invalidSize')}}</span>
+                    <span *ngIf="apiErrors.code === 4051">{{tv('message.invalidType')}} {{tv('correctiveAction.invalidType')}}</span>
+                </ng-container>
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+    <div class="file-upload">
+        <img [src]="preview" alt="" class="w-full h-36 rounded shadowed">
+    </div>
+</div>

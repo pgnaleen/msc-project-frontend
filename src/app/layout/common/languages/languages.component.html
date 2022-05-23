@@ -1,0 +1,13 @@
+<!-- Button -->
+<button #button [matMenuTriggerFor]="languages" mat-icon-button>{{activeLang?.code}}</button>
+
+<!-- Language menu -->
+<mat-menu #languages="matMenu" [xPosition]="'before'">
+    <ng-container *ngFor="let lang of availableLangs; trackBy: trackByFn">
+        <button (click)="setActiveLang(lang)" mat-menu-item>
+            <span class="flex items-center">
+                <span class="ms-3">{{lang.name}}</span>
+            </span>
+        </button>
+    </ng-container>
+</mat-menu>

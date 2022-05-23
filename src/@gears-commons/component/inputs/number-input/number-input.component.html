@@ -1,0 +1,42 @@
+<ng-container *transloco="let t; read: translationScope;">
+    <mat-form-field *ngIf="formGroup" class="w-full fuse-mat-dense" [ngClass]="readOnly?'form-field-border-none':''"
+        [formGroup]="formGroup">
+        <mat-label>{{t(translationLabel)}}</mat-label>
+        <input *ngIf="businessDataType === 'NUMBER_DECIMAL'" [class.text-rtl]="textDirection === 'rtl'" matInput [formControlName]="key" [readonly]="readOnly"
+            [type]="htmlDataType" min="0" step="0.01" oninput="validity.valid||(value='');">
+
+        <input *ngIf="businessDataType === 'NUMBER_INTEGER'" [class.text-rtl]="textDirection === 'rtl'" matInput [formControlName]="key" [readonly]="readOnly"
+            [type]="htmlDataType" min="0" oninput="validity.valid||(value='');">
+
+        <gears-icon [icon]="icon" [iconLib]="iconLib" className="icon-size-5" matSuffix></gears-icon>
+        <mat-error *ngIf="formGroup.get(key).errors as errors" class="mb-1">
+            <ng-container *transloco="let tv; read: 'validation';">
+                <span *ngIf="errors?.required">{{tv('message.required',{field: t(translationLabel)}) }}</span>
+                <span *ngIf="errors?.decimal">
+                    {{tv('message.invalidDecimalPoints') }}
+                    {{tv('correctiveAction.invalidDecimalPoints', {expected: errors.decimal.expectedLength}) }}
+                </span>
+                <span *ngIf="errors?.minlength">
+                    {{tv('message.minLength') }}
+                    {{tv('correctiveAction.minLength', {min: errors.minlength.requiredLength}) }}
+                </span>
+                <span *ngIf="errors?.maxlength">
+                    {{tv('message.maxLength') }}
+                    {{tv('correctiveAction.maxLength', {max: errors.maxlength.requiredLength}) }}
+                </span>
+                <ng-container *ngIf="formGroup.get(key).errors?.api as apiErrors">
+                    <span *ngIf="apiErrors.code === 4009">
+                        {{tv('message.alreadyExists', {field: t(translationLabel), value: apiErrors.value}) }}
+                        {{tv('correctiveAction.alreadyExists') }}
+                    </span>
+                </ng-container>
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!formGroup" class="w-full" [ngClass]="readOnly?'form-field-border-none':''">
+        <mat-label>{{title}}</mat-label>
+        <input [class.text-rtl]="textDirection === 'rtl'" matInput [readonly]="readOnly"
+            [type]="htmlDataType" [value]="value">
+    </mat-form-field>
+</ng-container>

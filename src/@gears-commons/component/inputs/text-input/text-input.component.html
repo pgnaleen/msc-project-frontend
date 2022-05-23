@@ -1,0 +1,42 @@
+<ng-container *transloco="let t; read: translationScope;">
+    <mat-form-field *ngIf="formGroup" class="w-full fuse-mat-dense" [ngClass]="readOnly?'form-field-border-none':''" [formGroup]="formGroup">
+        <mat-label>{{t(translationLabel)}}</mat-label>
+        <input *ngIf="elementType === 'input'" [class.text-rtl]="textDirection === 'rtl'" matInput [formControlName]="key" [readonly]="readOnly"
+               [type]="htmlDataType" [maxlength]="validations.maxLength">
+        <textarea *ngIf="elementType === 'textarea'" [class.text-rtl]="textDirection === 'rtl'" matInput [formControlName]="key" [type]="htmlDataType" [readonly]="readOnly"></textarea>
+        <gears-icon [icon]="icon" [iconLib]="iconLib" className="icon-size-5" matSuffix></gears-icon>
+        <mat-error *ngIf=" !readOnly&&formGroup.get(key).errors as errors " class="mb-1">
+            <ng-container *transloco="let tv; read: 'validation';">
+                <span *ngIf="errors?.required">{{tv('message.required',{field: t(translationLabel)}) }}</span>
+                <span *ngIf="errors?.decimal">
+                    {{tv('message.invalidDecimalPoints') }}
+                    {{tv('correctiveAction.invalidDecimalPoints', {expected: errors.decimal.expectedLength}) }}
+                </span>
+                <span *ngIf="errors?.email">{{tv('message.notAValidEmail') }} {{tv('correctiveAction.notAValidEmail') }} <br/></span>
+                <span *ngIf="errors?.url">{{tv('message.notAValidUrl') }} {{tv('correctiveAction.notAValidUrl') }}</span>
+                <span *ngIf="errors?.telephone">{{tv('message.notAValidTelephone') }} {{tv('correctiveAction.notAValidTelephone') }}<br/></span>
+                <span *ngIf="errors?.minlength">
+                    {{tv('message.minLength') }}
+                    {{tv('correctiveAction.minLength', {min: errors.minlength.requiredLength}) }}
+                </span>
+                <span *ngIf="errors?.maxlength">
+                    {{tv('message.maxLength') }}
+                    {{tv('correctiveAction.maxLength', {max: errors.maxlength.requiredLength}) }}
+                </span>
+                <ng-container *ngIf="formGroup.get(key).errors?.api as apiErrors">
+                    <span *ngIf="apiErrors.code === 4009">
+                        {{tv('message.alreadyExists', {field: t(translationLabel), value: apiErrors.value}) }}
+                        {{tv('correctiveAction.alreadyExists') }}
+                    </span>
+                    <span *ngIf="apiErrors.code === 4101">{{tv('message.notAValidEmail')}} {{tv('correctiveAction.notAValidEmail') }}</span>
+                </ng-container>
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!formGroup" class="w-full" [ngClass]="readOnly?'form-field-border-none':''">
+        <mat-label>{{title}}</mat-label>
+        <input *ngIf="elementType === 'input'" [class.text-rtl]="textDirection === 'rtl'" matInput [readonly]="readOnly" [type]="htmlDataType" [value]="value">
+        <textarea *ngIf="elementType === 'textarea'" [class.text-rtl]="textDirection === 'rtl'" matInput [type]="htmlDataType" [readonly]="readOnly" [value]="value"></textarea>
+    </mat-form-field>
+</ng-container>

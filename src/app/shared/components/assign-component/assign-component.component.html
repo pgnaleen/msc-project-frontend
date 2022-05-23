@@ -1,0 +1,72 @@
+<div class="w-full">
+    <div class="flex bg-primary px-4 py-3 items-center">
+        <gears-icon class="flex" icon="timeline" className="text-on-primary"></gears-icon>
+        <span class="font-bold ms-4 text-on-primary w-full">
+            {{'title.drawer.assignComponent' | transloco:{component: ('component.' + childComponent | transloco)} }}</span>
+        <gears-button class="flex" icon="close" type="icon"
+                      (buttonClick)="!saveBtnDisable ? confirmAndDismiss() : dismiss.emit(false)"
+                      iconClass="text-on-warn"></gears-button>
+    </div>
+
+    <div class="p-4 bg-white">
+        <div class="flex flex-col sm:flex-row items-center justify-end w-full max-w-xs sm:max-w-none">
+            <sis-save-button [disabled]="[saveBtnDisable]" (buttonClick)="save()"></sis-save-button>
+        </div>
+
+        <gears-text-input [value]="parentDisplayValue" [readOnly]="true"
+            [title]="'component.' + parentComponent | transloco"></gears-text-input>
+
+        <!-- assigned child codes -->
+        <mat-form-field class="fuse-mat-textarea w-full mt-2">
+            <mat-label class="text-secondary mb-2">{{selectorFieldLabel | transloco}}</mat-label>
+            <mat-chip-list aria-label="AssignedCodes">
+                <mat-chip *ngFor="let assignedChild of assignedChildList; let i = index">
+                    {{assignedChild.data[displayTitleField]}}
+                    <button matChipRemove class="flex items-center">
+                        <mat-icon (click)="removeAssignedComponent(assignedChild, i)">cancel</mat-icon>
+                    </button>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-form-field>
+
+        <!-- unassigned child codes-->
+        <div class="relative h-60">
+            <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+                <div class="flex flex-col overflow-hidden">
+                    <div class="flex flex-auto overflow-hidden">
+                        <div
+                            class="relative flex flex-auto flex-col w-full min-w-0 lg:min-w-90 lg:max-w-90 border-r z-10">
+                            <div class="overflow-y-auto">
+                                <ng-container *ngFor="let unAssignedChild of unAssignedChildList; let i = index">
+                                    <div class="z-20 flex items-center px-2 py-2 cursor-pointer border">
+                                        <div
+                                            class="flex flex-0 items-center justify-center w-7 h-7 rounded-full overflow-hidden">
+                                            <ng-container>
+                                                <div> <img
+                                                        src="../../../../assets/images/placeholders/image_placeholder.jpg"
+                                                        class="w-10 h-10 rounded-full">
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="min-w-0 ms-4">
+                                            <div class="font-medium leading-5 truncate">
+                                                {{unAssignedChild.data[displayTitleField]}}</div>
+                                            <div class="leading-5 truncate text-secondary">
+                                                {{unAssignedChild.data[displayDescriptionField]}}
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col items-end self-center ms-auto ps-2">
+                                            <mat-checkbox color="primary"
+                                                (change)="assignNewChild($event, unAssignedChild, i)">
+                                            </mat-checkbox>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

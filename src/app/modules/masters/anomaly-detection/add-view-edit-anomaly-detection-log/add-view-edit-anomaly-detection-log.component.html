@@ -1,0 +1,22 @@
+<gears-page-container>
+    <gears-page-header pageHeader [ngClass]="rootData?.mode=='EDIT'?'bg-primary-100':''" title="{{title}}" [breadcrumbItems]="breadcrumbItems">
+        <gears-add-view-edit-master-header-elements
+            [(activeStatus)]="activeStatus"
+            [mode]="rootData?.mode"
+            (dismissButtonClicked)="onDismissButtonClicked()"
+            (submitButtonCLicked)="submitButtonCLicked()"
+            (switchToEditMode)="switchToEditMode()"></gears-add-view-edit-master-header-elements>
+    </gears-page-header>
+
+    <form *ngIf="formGroup" #form="ngForm" [formGroup]="formGroup" class="mt-2">
+        <div class="grid grid-cols-3 px-6 py-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-x-8 gap-y-2 bg-white">
+            <gears-text-input [header]="headersMap.datasetCode" [formGroup]="formGroup" class="col-span-12"
+                              [readOnly]="readOnly" [translationScope]="translationScope"></gears-text-input>
+            <gears-text-input [header]="headersMap.datasetLocation" [formGroup]="formGroup" class="col-span-12"
+                              [readOnly]="readOnly" [translationScope]="translationScope"></gears-text-input>
+            <gears-text-input [header]="headersMap.accessLogLocation" [formGroup]="formGroup" class="col-span-12"
+                              [readOnly]="readOnly" [translationScope]="translationScope"></gears-text-input>
+        </div>
+    </form>
+
+</gears-page-container>

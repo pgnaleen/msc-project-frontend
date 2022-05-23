@@ -1,0 +1,36 @@
+.container {
+    background-color: white;
+    margin: 16px;
+}
+
+.headers {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-cell {
+    display: flex;
+    padding: 8px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.body-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.body-cell {
+    display: flex;
+    padding: 8px;
+    flex: 1;
+}
+
+.table-col-spacing {
+    padding-left: 12px;
+}

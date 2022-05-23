@@ -1,0 +1,7 @@
+<div class="w-full" *transloco="let t; read: translationScope;">
+    <div class="text-md font-medium truncate text-secondary">
+        <mat-label>{{t(key)}}</mat-label>
+    </div>
+    <gears-data-view [dataType]="dataType" [value]="value">
+    </gears-data-view>
+</div>

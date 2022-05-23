@@ -1,0 +1,15 @@
+<div class="flex">
+    <span class="truncate" *ngIf="dataType === 'TEXT'" matTooltipClass="custom-tooltip-class" [matTooltip]="value">{{value != null ? value : '-'}}</span>
+    <span *ngIf="dataType === 'BOOLEAN'" matTooltipClass="custom-tooltip-class" [matTooltip]="value">{{value != null ? value : '-'}}</span>
+    <span *ngIf="dataType === 'DATE'" matTooltipClass="custom-tooltip-class" [matTooltipDisabled]="value == null"
+          [matTooltip]="value | date:'yyyy-MM-dd'">{{value != null ? (value | date:'yyyy-MM-dd') : '-'}}</span>
+    <span *ngIf="dataType === 'NUMBER_INTEGER'" matTooltipClass="custom-tooltip-class" [matTooltipDisabled]="value == null"
+          [matTooltip]="value | number:'1.0-0'">{{value != null ? (value | number:'1.0-0') : '-'}}</span>
+    <span *ngIf="dataType === 'NUMBER_DECIMAL'" matTooltipClass="custom-tooltip-class" [matTooltip]="value">{{value != null ? value : '-'}}</span>
+    <span *ngIf="dataType === 'EMAIL'" matTooltipClass="custom-tooltip-class" [matTooltip]="value" class="truncate">{{value != null ? value : '-'}}</span>
+    <span *ngIf="dataType === 'TELEPHONE'" matTooltipClass="custom-tooltip-class" [matTooltip]="value">{{value != null ? value : '-'}}</span>
+    <span *ngIf="dataType === 'URL'" matTooltipClass="custom-tooltip-class" [matTooltip]="value">
+    <span *ngIf="value == null || value.length === 0">{{'-'}}</span>
+    <a *ngIf="value != null && value.length > 0" [href]="getUrl()" target="_blank">{{value}}</a>
+  </span>
+</div>

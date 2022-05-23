@@ -1,0 +1,67 @@
+<div *ngIf="!loading && (!dataSourceValue || dataSourceValue.length === 0)" class="mx-6 mb-6">
+    <gears-no-data-available-message></gears-no-data-available-message>
+</div>
+
+<div *ngIf="dataSourceValue && dataSourceValue.length > 0">
+    <div class="flex flex-col" *transloco="let t; read: 'table.' + component">
+        <!-- Header -->
+        <div class="flex flex-row z-10 sticky top-0 h-12 items-center border-b border-t text-md font-semibold
+        text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5" matSort matSortDisableClear
+             (matSortChange)="sortHeaderClicked($event)">
+            <div *ngFor="let header of displayHeadersList; trackBy: trackByFn"
+                 [style.width]="header.widthPercentage + '% !important'"
+                 class="hidden md:block ps-6"
+                 [mat-sort-header]="header.key">
+                {{t(header.label)}}
+            </div>
+            <div *ngIf="actions && actions.length > 0" class="hidden md:block"
+                 [style.width]="actionColumnWidthPercentage + '% !important'"></div>
+        </div>
+        <!-- Rows -->
+        <ng-container *ngFor="let data of dataSourceValue; trackBy: trackByFn">
+            <div class="flex flex-row items-center h-12 border-b bg-white" [ngClass]="{
+            'hover:bg-gray-100 dark:hover:bg-hover cursor-pointer' : rowClickable,
+            'bg-primary-50 dark:bg-hover' : selectedItemId && data.id === selectedItemId
+            }" (click)="rowClickable ? rowClicked.emit(data) : null">
+                <div *ngFor="let header of displayHeadersList; trackBy: trackByFn" class="hidden md:block truncate ps-6"
+                     [style.width]="header.widthPercentage + '% !important'">
+                    <gears-data-view class="w-full" *ngIf="!header.custom && header.key != 'activeStatus'"
+                                     [dataType]="header.dataType" [value]="overriddenValues && overriddenValues[header.key]
+                    ? overriddenValues[header.key](data) : data?.data[header.key]"></gears-data-view>
+                    <gears-active-status-chip *ngIf="!header.custom && header.key === 'activeStatus'"
+                                              [active]="data[header.key]"></gears-active-status-chip>
+                    <gears-custom-data-view *ngIf="header.custom" [data]="data?.data" [header]="header"></gears-custom-data-view>
+                </div>
+                <ng-container *ngIf="actions && actions.length > 0">
+                    <div class="hidden md:block truncate text-center" *transloco="let tm; read: 'menu'"
+                         [style.width]="actionColumnWidthPercentage + '% !important'">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();">
+                            <mat-icon class="icon-size-5">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" >
+                            <button [dir]="layoutDirection" *ngFor="let menuItem of actions; trackBy: trackByFn" mat-menu-item
+                                    (click)="actionPicked.emit({action: menuItem.action, data:data})"
+                                    [ngClass]="menuItem.bgClass">
+                                <gears-icon class="me-2" [icon]="menuItem.icon" [iconLib]="menuItem.iconLib"
+                                            [className]="menuItem.iconClass + ' icon-size-4'"></gears-icon>
+                                <span>{{tm(menuItem.label || menuItem.action)}}</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div *ngIf="dataSourceValue && dataSourceValue.length > 0" class="text-left bg-transparent">
+    <mat-paginator
+        (page)="onPageChange($event)"
+        class="sm:inset-x-0 inline-flex sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-transparent"
+        [ngClass]="{'pointer-events-none': loading}"
+        [length]="paginationMetaData.totalItems"
+        [pageIndex]="filter.pageNo"
+        [pageSize]="filter.pageSize"
+        [pageSizeOptions]="[10, 25, 100]"
+        [showFirstLastButtons]="true"></mat-paginator>
+</div>

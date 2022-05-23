@@ -1,0 +1,10 @@
+<div class="w-full">
+    <div class="flex no-items-available-container justify-center p-8">
+        <div class="flex flex-col">
+            <div class="flex justify-center">
+            <img class="w-50 h-32" [src]="src" alt=""/>
+            </div>
+            <span class="text-sm self-center text-secondary mt-4">{{message || ('message.common.noRecordsAvailable' | transloco)}}</span>
+        </div>
+    </div>
+</div>

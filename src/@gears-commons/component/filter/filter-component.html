@@ -1,0 +1,27 @@
+<div>
+    <div class="grid grid-cols-3 px-6 pt-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 gap-x-8 bg-gray-200">
+        <ng-container *ngFor="let filterItem of filterItems; trackBy: trackByFn">
+            <gears-select-input *ngIf="filterItem.type === 'dropdown'"
+                                [title]="filterItem.label | transloco"
+                                class="col-span-3"
+                                [isLookup]="filterItem.lookup"
+                                [readOnly]="filterItem.readOnly" [valueField]="filterItem.valueField"
+                                [displayField]="filterItem.displayField"
+                                [options]="filterItem.options"
+                                [initialValue]="filter[filterItem.field]"
+                                [translatable]="filterItem.translatable"
+                                [placeholder]="'dropdown.filter.placeholder' | transloco"
+                                (selectionChange)="onFilterValueChange(filterItem.field, $event.value)"></gears-select-input>
+            <gears-search-input *ngIf="filterItem.type === 'text' || filterItem.type === 'number'"
+                                className="w-full"
+                                [placeholder]="filterItem.label | transloco"
+                                icon=""
+                                [initialValue]="filter[filterItem.field]"
+                                [minLength]="filterItem.type === 'number' ? 1 : 2"
+                                (searchTextChange)="onFilterValueChange(filterItem.field, $event)"
+                                [htmlDataType]="filterItem.type"
+                                [title]="filterItem.label | transloco"
+                                class="col-span-3"></gears-search-input>
+        </ng-container>
+    </div>
+</div>

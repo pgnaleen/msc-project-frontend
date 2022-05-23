@@ -1,0 +1,2 @@
+export type DataType = 'TEXT' | 'TEXT_MULTILINE' | 'TEXT_RICH' | 'BOOLEAN' | 'NUMBER_INTEGER' | 'NUMBER_DECIMAL' |
+    'DATE' | 'URL' | 'EMAIL' | 'IMAGE' | 'TELEPHONE';

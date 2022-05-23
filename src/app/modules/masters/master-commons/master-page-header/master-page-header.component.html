@@ -1,0 +1,16 @@
+<gears-page-header [breadcrumbItems]="breadcrumbItems"
+                   title="{{'title.page.componentMaster' | transloco:{component: 'component.' + component | transloco} }}">
+    <gears-search-input (searchTextChange)="onSearchTextChange($event)" [initialValue]="filter.searchQuery"></gears-search-input>
+
+    <div class="flex sm:flex-row flex-col mt-4 sm:mt-0 sm:ms-4 gap-x-4">
+        <sis-filter-button (buttonClick)="onChangeFilterPanel()"></sis-filter-button>
+        <sis-assign-button *ngIf="assignButtonVisible"
+                           (buttonClick)="assignButtonClicked.emit($event)"></sis-assign-button>
+        <sis-add-button *ngIf="addButtonVisible" (buttonClick)="addButtonClicked.emit($event)"></sis-add-button>
+    </div>
+</gears-page-header>
+
+<!-- Filter section drop down with active - inactive status -->
+<div *ngIf="isOpenFilterPanel">
+    <gears-filter [filterItems]="filterItems" [filter]="filter" (filterChange)="filterChange.emit($event)"></gears-filter>
+</div>

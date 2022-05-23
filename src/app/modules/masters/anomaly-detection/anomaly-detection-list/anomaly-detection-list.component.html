@@ -1,0 +1,21 @@
+<gears-page-container>
+    <sis-master-page-header pageHeader
+        [breadcrumbItems]="breadcrumbItems"
+        [assignButtonVisible]="false"
+        [filterItems]="filterItems"
+        [(filter)]="filter"
+        (addButtonClicked)="onAddButtonClicked()"
+        [component]="component" (filterChange)="onFilterChanged($event)"></sis-master-page-header>
+
+    <gears-data-table
+        class="mt-4"
+        [dataSource]="dataList"
+        [loading]="loading"
+        [actions]="actions"
+        [component]="component"
+        [headers]="headers"
+        [(filter)]="filter"
+        [paginationMetaData]="metaData"
+        (filterChange)="onFilterChanged($event)"
+        (actionPicked)="onActionPicked($event)"></gears-data-table>
+</gears-page-container>

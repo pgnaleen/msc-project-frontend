@@ -1,0 +1,41 @@
+import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {AuthModule} from 'app/core/auth/auth.module';
+import {IconsModule} from 'app/core/icons/icons.module';
+import {TranslocoCoreModule} from 'app/core/transloco/transloco.module';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {CommonModule} from '@angular/common';
+import {MatDividerModule} from '@angular/material/divider';
+
+@NgModule({
+    imports: [
+        AuthModule,
+        IconsModule,
+        TranslocoCoreModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        CommonModule,
+        MatDividerModule
+    ],
+    exports: [
+
+    ],
+    declarations: [
+
+    ]
+})
+export class CoreModule {
+    /**
+     * Constructor
+     */
+    constructor(
+        @Optional() @SkipSelf() parentModule?: CoreModule
+    ) {
+        // Do not allow multiple injections
+        if (parentModule) {
+            throw new Error('CoreModule has already been loaded. Import this module in the AppModule only.');
+        }
+    }
+}

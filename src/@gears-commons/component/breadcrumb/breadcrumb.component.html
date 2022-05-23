@@ -1,0 +1,13 @@
+<div class="flex flex-wrap items-center font-medium">
+    <ng-container *ngFor="let breadcrumbItem of breadcrumbItems; let i = index">
+        <div>
+            <a class="whitespace-nowrap"
+               [ngClass]="i === breadcrumbItems.length - 1 ? 'text-gray-500' : 'text-primary-500'"
+               [routerLink]="breadcrumbItem.routerLink">{{breadcrumbItem.label? (breadcrumbItem.label | transloco) : breadcrumbItem.title}}</a>
+        </div>
+        <div *ngIf="i != breadcrumbItems.length - 1" class="flex items-center whitespace-nowrap">
+            <gears-icon iconLib="heroicons_solid" icon="chevron-right"
+                        className="icon-size-5 text-secondary"></gears-icon>
+        </div>
+    </ng-container>
+</div>

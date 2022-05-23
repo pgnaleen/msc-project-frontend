@@ -1,0 +1,6 @@
+<mat-form-field [class]="className" [floatLabel]="'always'">
+    <mat-label *ngIf="title">{{title}}</mat-label>
+    <gears-icon *ngIf="icon" matPrefix className="icon-size-5" class="me-2 self-center text-gray-400" [icon]="icon" [iconLib]="iconLib"></gears-icon>
+    <input [formControl]="searchControl" [type]="htmlDataType"
+           [placeholder]="placeholder || ('search.common.placeholder' | transloco)" matInput #query>
+</mat-form-field>

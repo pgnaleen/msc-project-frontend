@@ -1,0 +1,9 @@
+<fuse-alert
+    [appearance]="'fill'"
+    [dismissible]="true"
+    (dismissedChanged)="onDismiss($event)"
+    [type]="data.type">
+    <span *ngIf="data.title" fuseAlertTitle>{{data.title}}</span>
+    <gears-icon *ngIf="data.icon" fuseAlertIcon className="icon-size-5" [iconLib]="data.iconLib" [icon]="data.icon"></gears-icon>
+    <span>{{data?.message}}</span>
+</fuse-alert>

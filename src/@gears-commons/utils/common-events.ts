@@ -1,0 +1,5 @@
+export class CommonEvents {
+    public static LANGUAGE_CHANGED = 'LANGUAGE_CHANGED';
+    public static CONTEXT_DATA_CHANGED = 'CONTEXT_DATA_CHANGED';
+    public static CONTEXT_SELECTION_CHANGED = 'CONTEXT_SELECTION_CHANGED';
+}
